@@ -72,7 +72,8 @@ export default function recommend(maxPrice, maxDistance, languages, cuisines, re
   // jsprolog doesn't support less-than/greater-than comparison
   // so let's get around that using member(), since floats aren't supported
   // either by jsprolog anyway — or most built-in functions.
-  let lteMaxPrice = [...Array(Math.ceil(maxPrice) + 1).keys()];
+  // This only works because none of our prices or distances are floats.
+  let lteMaxPrice = [...Array(Math.floor(maxPrice) + 1).keys()];
   let lteMaxDistance = [...Array(Math.floor(maxDistance) + 1).keys()];
 
   let queryString = `restaurant(Name, Cost, Distance, Language, Cuisine, Restriction), ` +
